@@ -84,7 +84,7 @@ if __name__ == "__main__":
 
     for file_num in range(1,11):
         compare_course_rank = Course_code_ranker()
-        file_path = f"students_courses_{file_num}.csv"
+        file_path = f"lab_4/courses_csv/students_courses_{file_num}.csv"
 
         try:
             student_course_df = pd.read_csv(file_path)
