@@ -75,8 +75,8 @@ class Encoder:
         frequency = {char: file_string.count(char) for char in unique_variables}
         number_of_unique_variables = len(unique_variables)
 
-        if number_of_unique_variables == 1:
-            raise ValueError("Input contains only a single unique character. compression will not be useful")
+        # if number_of_unique_variables == 1:
+        #     raise ValueError("Input contains only a single unique character. compression will not be useful")
 
         if len(frequency) > 1 and all(freq == list(frequency.values())[0] for freq in frequency.values()):
             print("All characters have the same frequency. The heap might have some ambiguity")
@@ -153,7 +153,6 @@ if __name__ == "__main__":
 
     for file_path in file_list:
         print(f"\nProcessing file: {file_path}")
-        print("-" * 40)
         
         try:
             # Read the file content
@@ -163,7 +162,7 @@ if __name__ == "__main__":
             huffman_tree_root = encoder.encode_tree(file_string)
 
             # Generate Huffman codes
-            huffman_codes = encoder.generate_code(huffman_tree_root)
+            huffman_codes= encoder.generate_code(huffman_tree_root)
 
             # Encode the file content
             encoded_data = "".join([huffman_codes[char] for char in file_string])
@@ -174,6 +173,7 @@ if __name__ == "__main__":
 
             # Print results
             print("Huffman Codes:", huffman_codes)
+            print(encoded_data)
             print(f"Original Size (bits): {original_size}")
             print(f"Encoded Size (bits): {encoded_size}")
             print(f"Compression Ratio: {encoded_size / original_size * 100:.2f}%")
@@ -186,3 +186,5 @@ if __name__ == "__main__":
             print(f"Error: {e}")
         except Exception as e:
             print(f"Unexpected error: {e}")
+        
+        print("-" * 40)

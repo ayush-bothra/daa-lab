@@ -51,7 +51,12 @@ class Encode:
         unique_variables = sorted(unique_variables)  # Sort the unique characters
         encoder = {}
 
-        frequency = {char: file_string.count(char) for char in unique_variables}
+        frequency = {}
+        for char in file_string:
+            if char in frequency:
+                frequency[char] += 1
+            else:
+                frequency[char] = 1
         for i in range(number_of_unique_variables):
             # Create zero-padded binary representation
             binary_representation = self.convert_to_binary(i).zfill(fixed_size)
@@ -63,7 +68,7 @@ class Encode:
 
 # Example usage
 file_processor = ProcessFile()
-file_content = file_processor.take_file('lab_5/trial_file.txt')  # Provide the correct file path
+file_content = file_processor.take_file('lab_5/huffman_text/case_5.txt')  # Provide the correct file path
 encoder = Encode()
 encoding_map, original_size, encoded_size = encoder.encode(file_content)
 
